@@ -95,6 +95,7 @@ GEM
     ffi (1.9.18)
     font-awesome-rails (4.7.0.2)
       railties (>= 3.2, < 5.2)
+    geocoder (1.4.4)
     geokit (1.11.0)
     geokit-rails (2.2.0)
       geokit (~> 1.5)
@@ -248,6 +249,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise
   font-awesome-rails
+  geocoder
   geokit-rails
   jbuilder (~> 2.5)
   jquery-rails
