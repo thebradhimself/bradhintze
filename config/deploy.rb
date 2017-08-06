@@ -1,33 +1,53 @@
-# config valid only for current version of Capistrano
-lock "3.8.0"
+set :application, 'bradhintze'
+set :repo_url, 'git@github.com:thebradhimself/bradhintze.git'
 
-set :application, "my_app_name"
-set :repo_url, "git@example.com:me/my_repo.git"
+set :branch, :master 
 
-# Default branch is :master
-# ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
+set :deploy_to, '~/www/brad-hintze.com'
+set :scm, :git
 
-# Default deploy_to directory is /var/www/my_app_name
-# set :deploy_to, "/var/www/my_app_name"
-
-# Default value for :format is :airbrussh.
-# set :format, :airbrussh
-
-# You can configure the Airbrussh format using :format_options.
-# These are the defaults.
-# set :format_options, command_output: true, log_file: "log/capistrano.log", color: :auto, truncate: :auto
-
-# Default value for :pty is false
+set :format, :pretty
+set :linked_dirs, %w{log tmp vendor/bundle public/system public/uploads}
+# set :log_level, :info
+set :log_level, :info
+set :rails_env, "production"
 # set :pty, true
 
-# Default value for :linked_files is []
-# append :linked_files, "config/database.yml", "config/secrets.yml"
+# set :linked_files, %w{config/database.yml}
 
-# Default value for linked_dirs is []
-# append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
-
-# Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
-
-# Default value for keep_releases is 5
 # set :keep_releases, 5
+
+namespace :deploy do
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      # Your restart mechanism here, for example:
+      execute :touch, release_path.join('tmp/restart.txt')
+    end
+  end
+
+  after :restart, :clear_cache do
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
+      # Here we can do anything such as:
+      # within release_path do
+      #   execute :rake, 'cache:clear'
+      # end
+    end
+  end
+  after :publishing, "deploy:restart"
+  after :finishing, 'deploy:cleanup'
+end
+
+namespace :db do
+  task :full_reset do
+    on roles(:app) do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :bundle, "exec rake db:full_reset"
+        end
+      end
+    end
+  end
+end
+
