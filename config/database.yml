@@ -52,6 +52,7 @@ production:
   database: bradhintze_production
   username: brad
   password:
+  socket: /var/run/mysqld/mysqld.sock 
 
 
 
