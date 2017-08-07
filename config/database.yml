@@ -50,5 +50,8 @@ test:
 production:
   <<: *default
   database: bradhintze_production
-  username: bradhintze
-  password: <%= ENV['BRADHINTZE_DATABASE_PASSWORD'] %>
+  username: deploy
+  password:
+
+
+
