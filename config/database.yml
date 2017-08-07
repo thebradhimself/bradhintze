@@ -50,7 +50,7 @@ test:
 production:
   <<: *default
   database: bradhintze_production
-  username: deploy
+  username: brad
   password:
 
 
