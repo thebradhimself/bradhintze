@@ -13,4 +13,7 @@
 //= require jquery
 //= require rails-ujs
 //= require bootstrap/dist/js/bootstrap
+//= require react
+//= require react_ujs
+//= require components
 //= require_tree .

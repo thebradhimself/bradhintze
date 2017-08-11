@@ -24,6 +24,7 @@ gem 'devise'
 gem 'font-awesome-rails'
 gem 'geokit-rails'
 gem 'geocoder'
+gem "react-rails"
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
