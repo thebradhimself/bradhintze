@@ -13,4 +13,7 @@
 //= require jquery
 //= require rails-ujs
 //= require bootstrap/dist/js/bootstrap
+//= require packs/light.min
+//= require packs/brands.min
+//= require fontawesome.min
 //= require_tree .
