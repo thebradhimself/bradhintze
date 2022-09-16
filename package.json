@@ -2,7 +2,7 @@
   "name": "bradhintze",
   "private": true,
   "dependencies": {
-    "bootstrap": "^3.3.7"
+    "bootstrap": "^3.4.1"
   },
   "version": "1.0.0",
   "main": "index.js",
